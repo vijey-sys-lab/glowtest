@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLOWCORE - Premium Skincare & Haircare</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for better typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" id="homeLink">
+                <img src="images/logo.jpg" alt="Glowcore Logo" class="navbar-logo">
+                <span class="brand-name">GLOWCORE</span>
+            </a>
+            <div class="d-flex ms-auto align-items-center">
+                <div class="search-bar me-3">
+                    <input type="text" class="form-control" id="productSearch" placeholder="Search products...">
+                </div>
+                <button class="btn btn-cart position-relative" type="button" id="cartToggle">
+                    <i class="bi bi-cart-fill"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartBadge">
+                        0
+                    </span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Banner Carousel Section -->
+    <section class="banner-carousel-section mt-5 py-4">
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="images/banner1.png" class="d-block w-100" alt="Promotional Banner 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="images/banner2.png" class="d-block w-100" alt="Promotional Banner 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="images/banner3.png" class="d-block w-100" alt="Promotional Banner 3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Main Content - Product Display -->
+    <div class="container main-content pt-5">
+        <h2 class="section-title text-center mb-4">Our Products</h2>
+
+        <!-- Category Filter Buttons -->
+        <div class="d-flex justify-content-center flex-wrap gap-2 mb-4" id="categoryFilters">
+            <!-- Filter buttons will be dynamically loaded here by JavaScript -->
+        </div>
+
+        <!-- Product Grid -->
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4" id="productGrid">
+            <!-- Product cards will be dynamically loaded here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal fade" id="productDetailModal" tabindex="-1" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productDetailModalLabel">Product Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body row">
+                    <div class="col-md-6 text-center">
+                        <img src="" class="img-fluid main-modal-image mb-3" id="modalProductImage" alt="Product Image">
+                        <div class="thumbnail-gallery" id="modalThumbnailsContainer">
+                            <!-- Thumbnails will be loaded here by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 id="modalProductName"></h3>
+                        <p id="modalProductDescription"></p>
+                        <div class="rating-section mb-3">
+                            <span class="product-rating" id="modalProductRating"></span>
+                            <div class="star-breakdown" id="modalStarBreakdown">
+                                <!-- Star breakdown will be dynamically loaded -->
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <button class="btn btn-sm btn-outline-secondary me-2" id="decreaseQty">-</button>
+                            <span id="modalProductQuantity" class="me-2">1</span>
+                            <button class="btn btn-sm btn-outline-secondary" id="increaseQty">+</button>
+                        </div>
+                        <button class="btn btn-primary buy-now-btn me-2" id="buyNowBtn">Buy Now</button>
+                        <button class="btn btn-secondary add-to-cart-modal-btn" id="addToCartModalBtn">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <h5 class="suggested-products-title">You might also like:</h5>
+                    <div class="row g-2 justify-content-center" id="suggestedProductsContainer">
+                        <!-- Suggested products will be dynamically loaded here -->
+                    </div>
+                    <button type="button" class="btn btn-outline-secondary" id="backToHomeFromDetail">Back to Home</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide-in Shopping Cart Panel -->
+    <div class="cart-panel" id="cartPanel">
+        <div class="cart-header">
+            <h4>Your Cart</h4>
+            <button type="button" class="btn-close" id="closeCartPanel" aria-label="Close"></button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer">
+            <!-- Cart items will be dynamically loaded here by JavaScript -->
+            <p id="emptyCartMessage" class="text-center text-muted">Your cart is empty.</p>
+        </div>
+        <div class="cart-summary p-3 border-top">
+            <div class="d-flex justify-content-between cart-summary-line">
+                <span>Subtotal:</span>
+                <span>₹<span id="cartSubtotal">0.00</span></span>
+            </div>
+            <div class="d-flex justify-content-between cart-summary-line" id="discountRow" style="display: none;">
+                <span>Discount:</span>
+                <span>-₹<span id="cartDiscount">0.00</span></span>
+            </div>
+            <div class="d-flex justify-content-between cart-summary-line">
+                <span>GST (5%):</span>
+                <span>₹<span id="cartGST">0.00</span></span>
+            </div>
+            <div class="d-flex justify-content-between cart-summary-line" id="deliveryChargeRow"> <!-- Added id="deliveryChargeRow" -->
+                <span>Delivery Charge:</span>
+                <span>₹<span id="cartDeliveryCharge">0.00</span></span>
+            </div>
+            <div class="d-flex justify-content-between cart-summary-line" id="codChargeRow" style="display: none;">
+                <span>COD Charge:</span>
+                <span>+₹<span id="cartCODCharge">0.00</span></span>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between fw-bold fs-5 mb-3">
+                <span>Total:</span>
+                <span>₹<span id="cartTotal">0.00</span></span>
+            </div>
+
+            <!-- Payment Method Selection -->
+            <div class="mb-3">
+                <h6>Select Payment Method:</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="paymentOnline" value="Online Payment" checked>
+                    <label class="form-check-label" for="paymentOnline">
+                        Online Payment
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="paymentCod" value="Cash On Delivery">
+                    <label class="form-check-label" for="paymentCod">
+                        Cash On Delivery (COD)
+                    </label>
+                </div>
+            </div>
+
+            <p id="deliveryInfoMessage" class="text-muted small">Delivery charges apply for COD orders below ₹500. GST applies to all orders.</p>
+
+            <!-- Coupon Code Section -->
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="couponCodeInput" placeholder="Enter coupon code">
+                <button class="btn btn-outline-secondary" type="button" id="applyCouponBtn">Apply</button>
+            </div>
+            <div id="couponMessage" class="mb-3"></div>
+
+            <button class="btn btn-success w-100" id="whatsappCheckoutBtn"><i class="bi bi-whatsapp"></i> Checkout via WhatsApp</button>
+            <button class="btn btn-outline-primary w-100 mt-2" id="backToHomeFromCart">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- Product Added Toast Animation -->
+    <div class="toast align-items-center text-white bg-success border-0 fade hide product-added-toast" role="alert" aria-live="assertive" aria-atomic="true" id="productAddedToast">
+        <div class="d-flex">
+            <div class="toast-body">
+                Product added to cart successfully!
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+
+    <!-- Contact Us Section -->
+    <div class="container contact-us-section mt-5 py-4">
+        <h2 class="text-center mb-4">Contact Us</h2>
+        <div class="d-flex justify-content-center flex-wrap">
+            <a href="https://www.instagram.com/glowcore_ltd/" target="_blank" class="contact-link mx-3 mb-2">
+                <i class="bi bi-instagram"></i> glowcore_ltd
+            </a>
+            <a href="mailto:glowcoreltd@gmail.com" class="contact-link mx-3 mb-2">
+                <i class="bi bi-envelope-fill"></i> glowcoreltd@gmail.com
+            </a>
+            <a href="https://wa.me/9150059199?text=I%20want%20to%20know%20info%20about%20glow%20core" target="_blank" class="contact-link mx-3 mb-2">
+                <i class="bi bi-whatsapp"></i> +91 91500 59199
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer text-center py-3 mt-5">
+        <div class="container">
+            <span>&copy; 2025 GLOWCORE. All Rights Reserved.</span>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle (Popper.js included) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

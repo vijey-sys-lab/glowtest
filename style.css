@@ -1,0 +1,695 @@
+:root {
+    --primary-color: #6a0dad; /* Purple */
+    --secondary-color: #ffd700; /* Gold */
+    --dark-color: #1a1a1a; /* Black */
+    --light-color: #f8f9fa; /* Light grey/white */
+    --text-color: #333;
+    --card-bg: #fff;
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
+}
+
+html {
+    overflow-x: hidden; /* Ensure no horizontal scroll on html element */
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--light-color);
+    color: var(--text-color);
+    margin-top: 56px; /* Space for fixed navbar */
+    overflow-x: hidden; /* Prevent horizontal scroll due to cart panel */
+    /* No transition on body transform if we're not using it to shift content */
+}
+
+/* More robust CSS rules for when cart is open to prevent ALL content shift */
+body.cart-open {
+    overflow: hidden; /* Stops all scrolling on the body */
+    position: fixed; /* Fixes the body in place */
+    width: 100vw; /* Ensures it takes full viewport width */
+    height: 100vh; /* Ensures it takes full viewport height */
+    top: 0;
+    left: 0;
+    /* Important: Explicitly remove any padding or margin that might cause shifts */
+    padding-right: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* --- Navbar Styling --- */
+.navbar {
+    background-color: var(--dark-color);
+    border-bottom: 2px solid var(--primary-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    color: var(--secondary-color) !important;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
+.navbar-logo {
+    height: 40px; /* Adjust logo size */
+    margin-right: 10px;
+}
+
+.brand-name {
+    color: var(--secondary-color);
+}
+
+.search-bar .form-control {
+    border-radius: 50px;
+    border: 1px solid var(--primary-color);
+    padding-left: 15px;
+    background-color: var(--light-color);
+    color: var(--text-color);
+}
+
+.search-bar .form-control::placeholder {
+    color: #888;
+}
+
+.btn-cart {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.btn-cart:hover {
+    background-color: var(--secondary-color);
+    color: var(--dark-color);
+}
+
+.btn-cart .badge {
+    top: -5px !important;
+    right: -5px !important;
+    font-size: 0.7em;
+    padding: 0.4em 0.6em;
+}
+
+/* --- Banner Carousel Styling --- */
+.banner-carousel-section {
+    max-width: 1200px; /* Limit carousel width */
+    margin: 0 auto; /* Center the carousel */
+    padding: 20px 0; /* Add some vertical padding */
+}
+
+.banner-carousel-section .carousel-item img {
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    height: 400px; /* Fixed height for banners */
+    object-fit: cover; /* Cover ensures the image fills the area */
+}
+
+.banner-carousel-section .carousel-indicators [data-bs-target] {
+    background-color: var(--primary-color);
+}
+
+.banner-carousel-section .carousel-control-prev-icon,
+.banner-carousel-section .carousel-control-next-icon {
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    padding: 15px;
+}
+
+/* --- Main Content & Product Cards --- */
+.main-content {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.section-title {
+    color: var(--primary-color);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.product-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Ensure cards are of equal height */
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px; /* Fixed height for all product images */
+    object-fit: contain; /* Ensures the image is not cut */
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.product-card-body {
+    padding: 15px;
+    flex-grow: 1; /* Allows body to take available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card h5 {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.product-card p {
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.product-card .btn-add-to-cart {
+    background-color: #007bff; /* Original blue for Add to Cart */
+    color: var(--light-color);
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    width: 100%;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.product-card .btn-add-to-cart:hover {
+    background-color: #0056b3;
+}
+
+.view-items-btn {
+    background-color: var(--secondary-color);
+    color: var(--dark-color);
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    width: 100%;
+    transition: background-color var(--transition-speed) ease;
+    margin-top: 10px;
+    margin-bottom: 5px; /* Added margin for separation */
+}
+
+.view-items-btn:hover {
+    background-color: gold;
+}
+
+/* --- Product Detail Modal --- */
+.modal-content {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.modal-header {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border-bottom: none;
+}
+
+.modal-header .btn-close {
+    filter: invert(1); /* Makes the close button white */
+}
+
+/* Styles for main modal image and thumbnail gallery */
+.main-modal-image {
+    max-height: 400px; /* Keep main image size */
+    object-fit: contain;
+    border: 1px solid #eee;
+    padding: 5px;
+    border-radius: var(--border-radius);
+}
+
+.thumbnail-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Space between thumbnails */
+    margin-top: 15px;
+    flex-wrap: wrap; /* Allow thumbnails to wrap to next line if many */
+}
+
+.thumbnail-gallery img {
+    width: 60px; /* Size of thumbnail images */
+    height: 60px;
+    object-fit: cover; /* Cover ensures image fills the space without distortion */
+    border: 2px solid transparent; /* Default border */
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.thumbnail-gallery img:hover {
+    transform: scale(1.05);
+}
+
+.thumbnail-gallery img.active-thumbnail {
+    border-color: var(--primary-color); /* Highlight active thumbnail */
+}
+
+
+.rating-section {
+    font-size: 1.1rem;
+    color: #f39c12; /* Star color */
+}
+
+.star-breakdown {
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+.star-breakdown div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3px;
+}
+
+.star-breakdown span:first-child {
+    width: 20px;
+    text-align: right;
+    margin-right: 5px;
+}
+
+.star-bar-container {
+    flex-grow: 1;
+    background-color: #eee;
+    height: 8px;
+    border-radius: 4px;
+    margin: 0 5px;
+}
+
+.star-bar {
+    height: 100%;
+    background-color: #f39c12;
+    border-radius: 4px;
+}
+
+.buy-now-btn, .add-to-cart-modal-btn {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border: none;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.buy-now-btn:hover, .add-to-cart-modal-btn:hover {
+    background-color: var(--secondary-color);
+    color: var(--dark-color);
+}
+
+.suggested-products-title {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+#suggestedProductsContainer .product-card {
+    border: none;
+    box-shadow: none;
+    height: auto; /* Allow height to adjust */
+}
+
+#suggestedProductsContainer .product-card img {
+    height: 120px; /* Smaller images for suggested products */
+}
+
+#suggestedProductsContainer .product-card .btn-add-to-cart {
+    font-size: 0.8em;
+    padding: 5px 10px;
+}
+
+#backToHomeFromDetail {
+    margin-top: 20px;
+    width: 100%;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+#backToHomeFromDetail:hover {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+}
+
+/* --- Slide-in Cart Panel --- */
+.cart-panel {
+    position: fixed;
+    top: 0;
+    right: -400px; /* Hidden by default */
+    width: 380px; /* Adjust width as needed */
+    height: 100%;
+    background-color: var(--card-bg);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    transition: right var(--transition-speed) ease-in-out; /* Ensure it overlaps everything else except toast */
+    z-index: 1055; /* Higher than modal (1050) but still below toast (1060) */
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-panel.show {
+    right: 0;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+.cart-header h4 {
+    margin: 0;
+}
+
+.cart-header .btn-close {
+    filter: invert(1);
+}
+
+.cart-items {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Distribute items with space between */
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #eee; /* Clearer separator */
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin-right: 15px;
+    border-radius: var(--border-radius);
+    background-color: #f8f8f8; /* Light background for images */
+    flex-shrink: 0; /* Prevent image from shrinking */
+}
+
+.cart-item-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 10px; /* Add some space before controls */
+}
+
+.cart-item-details h6 {
+    margin: 0 0 5px 0;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.cart-item-details p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.cart-item-actions { /* New class for the action buttons container */
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Reduced gap for tighter controls */
+    flex-shrink: 0; /* Prevent actions from shrinking */
+}
+
+.cart-item-quantity-controls {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ced4da; /* Add border to quantity controls */
+    border-radius: 4px; /* Rounded corners for the group */
+    overflow: hidden; /* Hide overflow for combined border */
+}
+
+.cart-item-quantity-controls button {
+    background-color: #e9ecef;
+    border: none; /* Remove individual button borders */
+    color: #495057;
+    width: 28px; /* Slightly larger buttons */
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem; /* Clearer +/- symbols */
+    padding: 0;
+    border-radius: 0; /* No individual border radius */
+    transition: background-color 0.2s ease;
+}
+
+.cart-item-quantity-controls button:hover {
+    background-color: #d0d0d0;
+}
+
+.cart-item-quantity-controls span {
+    margin: 0; /* Remove margin, spacing handled by buttons */
+    padding: 0 8px; /* Padding inside the span */
+    font-weight: bold;
+    color: var(--text-color);
+    border-left: 1px solid #ced4da; /* Separator between number and buttons */
+    border-right: 1px solid #ced4da;
+}
+
+.remove-from-cart-btn {
+    background: none;
+    border: none;
+    color: #dc3545; /* Red for remove button */
+    font-size: 1.2rem;
+    padding: 0;
+    margin-left: 10px; /* Space from quantity controls */
+    cursor: pointer;
+    transition: color 0.2s ease;
+    flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+.remove-from-cart-btn:hover {
+    color: #bd2130;
+}
+
+/* Cart Summary & Checkout */
+.cart-summary {
+    background-color: var(--light-color);
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.cart-summary .cart-summary-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px; /* Reduced margin for tighter spacing */
+    font-size: 0.95rem;
+}
+
+.cart-summary .cart-summary-line span:first-child {
+    color: #555;
+}
+
+.cart-summary .cart-summary-line span:last-child {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.cart-summary .fw-bold.fs-5 { /* Total line */
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 1.25rem !important;
+    color: var(--primary-color);
+}
+
+
+.cart-summary hr {
+    border-top: 1px solid #ddd;
+    margin: 15px 0;
+}
+
+.cart-summary .btn {
+    font-size: 1.1rem;
+    padding: 10px;
+}
+
+/* Toast Notification */
+.product-added-toast {
+    position: fixed;
+    top: 70px; /* Below navbar */
+    right: 20px;
+    z-index: 1070; /* Above cart panel */
+    min-width: 250px;
+    animation: fadeInOut 3s forwards; /* Animation for fade in and out */
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-20px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+}
+
+/* Home Link (from navbar brand) */
+#homeLink {
+    cursor: pointer;
+}
+
+/* Category Filter Buttons */
+.category-filter-btn {
+    background-color: #e0e0e0;
+    color: var(--text-color);
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 0.95rem;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+.category-filter-btn:hover {
+    background-color: #d0d0d0;
+    border-color: #bbb;
+}
+
+.category-filter-btn.active {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border-color: var(--primary-color);
+}
+
+/* Contact Us Section */
+.contact-us-section {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    border-radius: var(--border-radius);
+    margin-top: 3rem !important;
+    padding: 2rem !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.contact-us-section h2 {
+    color: var(--secondary-color);
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 1.5rem;
+}
+
+.contact-link {
+    color: var(--light-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin: 0 15px;
+    display: flex;
+    align-items: center;
+    transition: color var(--transition-speed) ease;
+}
+
+.contact-link i {
+    font-size: 1.5rem;
+    margin-right: 8px;
+    color: var(--secondary-color);
+}
+
+.contact-link:hover {
+    color: var(--secondary-color);
+}
+
+/* Footer Styling */
+.footer {
+    background-color: var(--dark-color);
+    color: #bbb;
+    border-top: 1px solid var(--primary-color);
+    font-size: 0.9rem;
+}
+
+
+/* General Professionalism Enhancements */
+/* Further refined button styles */
+.btn-primary, .btn-secondary, .btn-success {
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.btn-primary:focus, .btn-secondary:focus, .btn-success:focus, .btn-outline-secondary:focus {
+    box-shadow: 0 0 0 0.25rem rgba(106, 13, 173, 0.25); /* Primary color focus ring */
+}
+
+/* Card hover effect enhancement */
+.product-card:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) { /* Medium devices (tablts) */
+    .navbar-brand {
+        font-size: 1.5rem;
+    }
+    .navbar-logo {
+        height: 30px;
+    }
+    .cart-panel {
+        width: 100%; /* Full width on smaller screens, relative to body */
+    }
+    .product-card img {
+        height: 180px;
+    }
+    .modal-body {
+        flex-direction: column; /* Stack columns vertically in modal */
+    }
+    .modal-body .col-md-6 {
+        width: 100%;
+    }
+    .modal-body .col-md-6:first-child {
+        margin-bottom: 20px;
+    }
+    /* Adjust filter button padding for smaller screens */
+    .category-filter-btn {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+    .banner-carousel-section .carousel-item img {
+        height: 250px; /* Adjust height for smaller screens */
+    }
+}
+
+@media (max-width: 576px) { /* Small devices (phones) */
+    .navbar .d-flex {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    .search-bar {
+        flex-grow: 1; /* Allow search bar to take available space */
+    }
+    .btn-cart {
+        margin-left: 10px;
+    }
+    .banner-carousel-section .carousel-item img {
+        height: 180px; /* Further adjust height for small phones */
+    }
+}
